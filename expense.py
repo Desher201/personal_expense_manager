@@ -6,14 +6,14 @@ class Expense:
     id = 0
     expense_path = Path("expenses.json")
 
-    def __init__(self, name, amount, category):
-        self.name = name
-        self.amount = amount
-        self.category = category
+    def __init__(self, name:str, amount:int, category:str):
+        self.name:str = name
+        self.amount:int = amount
+        self.category:str = category
         Expense.id += 1
         self.id = Expense.id
 
-    def save_expense(self):
+    def save_expense(self) -> None:
         if self.expense_path.exists():
             with open(self.expense_path, "r", encoding="utf8") as file:
                 try:
