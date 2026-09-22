@@ -1,8 +1,12 @@
 import json
-
-from unicodedata import category
-
 from expense import Expense
+import logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    filename="expense.log",
+    encoding="utf-8"
+)
 
 while True:
     print(f"1. Додати витрату"
@@ -23,7 +27,7 @@ while True:
                 print("Сума має бути int")
                 continue
         category = input("Введіть категорію")
-        expense = Expense(name, amount, category)
+        expense = Expense(name, int(amount), category)
         expense.save_expense()
 
     elif choice == "2":
@@ -34,10 +38,12 @@ while True:
                 for i in data:
                     print(f"{i["id"]}. {i["name"]:20} {i["amount"]} грн {i["category"]}")
                 print(f"=" * 50)
+                logging.info(f"Вивелося: {len(data)} витрат")
             except json.JSONDecodeError:
                 print(f"=" * 50)
                 print(f"Витрат нема")
                 print(f"=" * 50)
+                logging.info(f"Вивелося: 0 витрат")
 
     elif choice == "3":
         category = input("Введіть назву категорії")
@@ -76,7 +82,9 @@ while True:
         print("Загальна сума:",suma)
         print("="*50)
     elif choice == "5":
+        logging.info(f"Програму завершено")
         break
     else:
         print("Невірне введення")
+        logging.info("Невірне введення")
         continue

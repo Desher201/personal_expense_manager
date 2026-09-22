@@ -1,5 +1,12 @@
 import json
 from pathlib import Path
+import logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    filename="expense.log",
+    encoding="utf8"
+)
 
 
 class Expense:
@@ -23,6 +30,7 @@ class Expense:
         else:
             data = []
 
+
         data.append({
             "id": self.id,
             "name": self.name,
@@ -33,7 +41,7 @@ class Expense:
 
         with open(self.expense_path, "w", encoding="utf8") as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
-
+            logging.info(f"Saved expense: {self.id}")
 
 # expense = Expense("expense", 1, "expense")
 # expense_2 = Expense("expense_2", 1, "expense_2")
