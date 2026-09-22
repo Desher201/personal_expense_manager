@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "expense",
+        "amount": 1,
+        "category": "expense"
+    },
+    {
+        "id": 2,
+        "name": "expense_2",
+        "amount": 1,
+        "category": "expense_2"
+    }
+]
